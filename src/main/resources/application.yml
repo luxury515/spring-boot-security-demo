@@ -1,0 +1,32 @@
+# 포트
+server:
+  port: 8080
+spring:
+  # datasource 설정
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/demo_security?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+# jwt 설정
+jwt:
+  secret: JWTSecret
+  tokenHeader: Authorization
+  tokenPrefix: Sans-
+
+  expiration: 86400 # 1day ,604800 1 weekly
+  # 인증필요없는 url
+  antMatchers: /index/**,/login/**,/favicon.ico
+# Mybatis-plus 관련 설정
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  global-config:
+    db-config:
+      id-type: AUTO
+      field-strategy: NOT_EMPTY
+      db-type: MYSQL
+  configuration:
+    map-underscore-to-camel-case: true
+    call-setters-on-nulls: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
